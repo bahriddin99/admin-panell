@@ -10,3 +10,15 @@ export const signInValidationSchema = Yup.object().shape({
       .required("Password is required"),
    
   });
+  export const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    first_name: Yup.string().required("First Name is required"),
+    gender: Yup.string().required("Gender is required"),
+    last_name: Yup.string().required("Last Name is required"),
+    password: Yup.string().required("Password is required")
+  });
+
+
+ export const CategoryValidationSchema = Yup.object().shape({
+    category_name: Yup.string().required("Name is required"),
+  });

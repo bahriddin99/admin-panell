@@ -13,9 +13,9 @@ const Root = () => {
       <Route path="/" element={<App />}>
         <Route index element={<LoginIn />} />
         <Route path="/main/*" element={<Main />}>
+          <Route index element={<Workers />} />
           <Route path="category" element={<Category />} />
           <Route path="product" element={<Products />} />
-          <Route path="works" element={<Workers />} />
         </Route>
       </Route>
     )

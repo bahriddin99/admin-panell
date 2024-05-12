@@ -12,26 +12,24 @@ interface  Route {
 }
 
 const routers:Route[] = [
+  
     {
         path :"/main",
-        content: "Asosiy",
-        icon: <DashboardCustomizeIcon/>
-    },
-    {
-        path :"/main/category",
-        content: "Buyurtmalar",
-        icon: <DryCleaningIcon/>
+        content: "Workers",
+        icon: <EventNoteIcon/>
     },
     {
         path :"/main/product",
-        content: "mahsulot",
+        content: "Products",
         icon: <PersonOutlineIcon/>
     },
     {
-        path :"/main/works",
-        content: "Ish",
-        icon: <EventNoteIcon/>
-    },
+        path :"/main/category",
+        content: "Categories",
+        icon: <DryCleaningIcon/>
+    }
+   
+   
 
 ]
 

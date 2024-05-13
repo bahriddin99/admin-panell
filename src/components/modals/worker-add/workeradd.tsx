@@ -2,9 +2,15 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { Button, TextField, RadioGroup, Radio, FormControlLabel } from "@mui/material";
-import WorkerStore from "../../../store/workers/workerstore";
-import { PostData } from "../../../service/worker/worker";
+import {
+  Button,
+  TextField,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+} from "@mui/material";
+
+import { PostData, worker } from "../../../service/worker/worker";
 import { validationSchema } from "../../../utils/validation";
 
 const style = {
@@ -19,24 +25,22 @@ const style = {
 };
 
 export default function WorkerAdd() {
-  const { postData } = WorkerStore();
+
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const initialValues:PostData = {
+  const initialValues: PostData = {
     email: "",
     first_name: "",
     gender: "",
     last_name: "",
-    password: ""
+    password: "",
   };
 
-
-  const handleSubmit = async (values:PostData) => {
-    
-    const status = await postData(values);
+  const handleSubmit = async (values: PostData) => {
+    const status = await worker.post(values);
     if (status === 201) {
       handleClose();
     } else {
@@ -48,7 +52,7 @@ export default function WorkerAdd() {
     <div>
       <button
         onClick={handleOpen}
-        className="py-2 px-6 text-white font-semibold bg-[#2389DA] hover:bg-blue-800 active:bg-[#2389DA] duration-200 rounded-lg"
+        className="py-2 px-6 text-white font-semibold bg-[#2389DA] duration-200 rounded-lg"
       >
         Add a worker
       </button>
@@ -65,14 +69,20 @@ export default function WorkerAdd() {
             onSubmit={handleSubmit}
           >
             <Form className="max-w-[600px] w-full flex flex-col gap-[12px]">
-              <h1 className="text-center mb-2 text-[26px] font-bold">add a worker</h1>
+              <h1 className="text-center mb-2 text-[26px] font-bold">
+                Add a worker
+              </h1>
               <Field
                 as={TextField}
                 label="Email"
                 name="email"
                 className="w-full mb-3"
               />
-              <ErrorMessage name="email" component="p" className="mb-3 text-red-500 text-center" />
+              <ErrorMessage
+                name="email"
+                component="p"
+                className="mb-3 text-red-500 text-center"
+              />
 
               <Field
                 as={TextField}
@@ -80,7 +90,11 @@ export default function WorkerAdd() {
                 name="first_name"
                 className="w-full mb-3"
               />
-              <ErrorMessage name="first_name" component="p" className="mb-3 text-red-500 text-center" />
+              <ErrorMessage
+                name="first_name"
+                component="p"
+                className="mb-3 text-red-500 text-center"
+              />
 
               <Field
                 as={RadioGroup}
@@ -89,11 +103,23 @@ export default function WorkerAdd() {
                 className="flex items-center mb-4"
               >
                 <div className="flex items-center justify-between">
-                <FormControlLabel value="male" control={<Radio />} label="Male" />
-                <FormControlLabel value="female" control={<Radio />} label="Female" />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="Male"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio />}
+                    label="Female"
+                  />
                 </div>
               </Field>
-              <ErrorMessage name="gender" component="p" className="mb-3 text-red-500 text-center" />
+              <ErrorMessage
+                name="gender"
+                component="p"
+                className="mb-3 text-red-500 text-center"
+              />
 
               <Field
                 as={TextField}
@@ -101,22 +127,33 @@ export default function WorkerAdd() {
                 name="last_name"
                 className="w-full mb-3"
               />
-              <ErrorMessage name="last_name" component="p" className="mb-3 text-red-500 text-center" />
+              <ErrorMessage
+                name="last_name"
+                component="p"
+                className="mb-3 text-red-500 text-center"
+              />
 
+             
               <Field
+                name="password"
+                type="string"
                 as={TextField}
                 label="Password"
-                name="password"
-                type="password"
-                className="w-full mb-3"
+                helperText={
+                  <ErrorMessage
+                    name="password"
+                    component="p"
+                    className="text-red-500 text-[15px]"
+                  />
+                }
               />
-              <ErrorMessage name="password" component="p" className="mb-3 text-red-500 text-center" />
+              <ErrorMessage
+                name="password"
+                component="p"
+                className="mb-3 text-red-500 text-center"
+              />
 
-              <Button
-                variant="contained"
-                type="submit"
-                className="w-full py-3"
-              >
+              <Button variant="contained" type="submit">
                 add
               </Button>
             </Form>

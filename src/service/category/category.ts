@@ -3,10 +3,12 @@ import request from "../config/config";
 
 export interface postData{
     category_name: string;
+    category_id:string;
 }
 
 export interface UpdateData extends postData{
     category_id:string;
+    
 }
 
 interface getParams{

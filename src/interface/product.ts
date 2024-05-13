@@ -1,17 +1,28 @@
-export interface GetParams {
-    color: "string",
-    cost: "number",
-    count:" number",
-    made_in: "string",
-    product_name: "string" | undefined,
-  
-  }
-  
-  export interface ProducteStore {
-    data: any[];
-    getData: (params: GetParams) => Promise<any>;
-  }
-  
-  export interface RequestProducts {
-    get_product: (params: GetParams) => any;
-  }
+export interface GetProduct {
+  limit: number;
+  page: number;
+}
+export interface createProduct {
+  age_max: any;
+  age_min: any;
+  category_id?: string;
+  color: string;
+  cost: any;
+  count: any;
+  description: string;
+  discount: any;
+  for_gender: string;
+  made_in: string;
+  product_name: string;
+  size: any;
+}
+export interface ProductsStore {
+  data: any[];
+  isLoading: boolean;
+  getData: (params: GetProduct) => Promise<any>;
+  createProduct: (data: createProduct) => Promise<any>;
+}
+export interface Request {
+  get_products: (data: GetProduct) => any;
+  create_product: (data: createProduct) => any;
+}

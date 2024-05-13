@@ -11,7 +11,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-
+import baxa from "../../assets/baxa.jpg"
 import { removeDataToCookie } from '../../utils/data-server';
 
 export default function AccountMenu() {
@@ -43,7 +43,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            {/* <Avatar sx={{ width: 32, height: 32 }}> <img src={baxa} alt="rasm bor" /> </Avatar> */}
+          <Avatar sx={{ width: 32, height: 32 }}> <img src={baxa} alt="rasm bor" /> </Avatar> 
           </IconButton>
         </Tooltip>
       </Box>

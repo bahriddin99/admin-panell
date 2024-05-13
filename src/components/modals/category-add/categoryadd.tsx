@@ -1,11 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { toast } from "react-toastify";
+import Notifation from "../../../utils/notifation";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import { Button, TextField } from "@mui/material";
-import CategoryStore from "../../../store/category/categorystore";
+
 import { CategoryValidationSchema } from "../../../utils/validation";
+import { category, postData } from "../../../service/category/category";
+import Modal from '@mui/material/Modal';
 
 const style = {
   position: "absolute" as "absolute",
@@ -14,40 +15,38 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  
+
   boxShadow: 24,
   p: 4,
 };
 
 export default function CategorMadalAdd() {
-  const { postData } = CategoryStore();
-
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  type postData = {
-    category_name: string;
-  };
-
- 
-
   const initialValues: postData = {
     category_name: "",
+    category_id: "",
   };
 
-  const handelSubmit = async (value: postData) => {
-    const status = await postData(value);
-    if (status === 201) {
-      toast.success("success full");
+  const handelSubmit = async (values: postData) => {
+    try {
+      console.log(values);
+      const res = await category.post(values);
+      console.log(res);
+      Notifation({
+        title: "Ma'lumot muvaffaqiyatli qo'shildi",
+        type: "success",
+      });
       handleClose();
-    } else {
-      toast.error("Error :" + status);
-      handleClose();
+      setTimeout(() => {
+        window.location.reload();
+      }, 400);
+    } catch (error) {
+      console.log(error);
     }
   };
-
- 
 
   return (
     <div>
@@ -63,12 +62,11 @@ export default function CategorMadalAdd() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style} >
+        <Box sx={style}>
           <Formik
             initialValues={initialValues}
             validationSchema={CategoryValidationSchema}
             onSubmit={handelSubmit}
-            
           >
             <Form className=" max-w-[600px]  w-full flex flex-col gap-[12px]">
               <h1 className="text-center mb-2 text-[26px] font-bold">
@@ -102,3 +100,4 @@ export default function CategorMadalAdd() {
     </div>
   );
 }
+

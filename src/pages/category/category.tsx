@@ -5,25 +5,36 @@ import { ToastContainer } from "react-toastify";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-import CategoryStore from "../../store/category/categorystore";
-
 import Tables from "../../components/ui/tabel";
 import CategorMadalAdd from "../../components/modals/category-add/categoryadd";
+import { category } from "../../service/category/category";
 
 function Category() {
- 
-  const [countPage] = useState(1);
-  const [countLimit] = useState(10);
-  const { isLoader, data, getData, deleteData } = CategoryStore();
+  const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  const getData = async () => {
+    setLoading(true);
+    try {
+      const respons = await category.get({ page: 1, limit: 10 });
+      console.log(respons);
+      if (respons.status === 200) {
+        setData(respons.data.categories);
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    getData({ page: countPage, limit: countLimit });
+    getData();
   }, []);
 
   const theder = [
-    { title: "", value: "id" },
-    { title: "S/N", value: "t/r" },
-    { title: "Category", value: "category_name" },
+    { title: "T/R", value: "index" },
+    { title: "Category Name", value: "category_name" },
+    { title: "Category Id", value:"category_id" },
     { title: "Action", value: "action" },
   ];
 
@@ -50,6 +61,7 @@ function Category() {
               <SearchIcon />
             </IconButton>
           </Paper>
+          
         </div>
         <div className="flex items-center gap-2">
           <CategorMadalAdd />
@@ -59,8 +71,8 @@ function Category() {
       <Tables
         headers={theder}
         body={data}
-        isLoading={isLoader}
-        deletIdData={deleteData}
+        isLoading={isLoading}
+        
       />
       <div className="flex items-center justify-end gap-3">
         <button className="py-1 px-1 border rounded-lg hover:shadow-md active:shadow-sm  duration-200 cursor-pointer ">

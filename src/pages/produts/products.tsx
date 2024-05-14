@@ -6,7 +6,7 @@ import useProductsStore from "../../store/productstore";
 import ProductsAdd from "../../components/modals/products-add/productsadd";
 
 export default function Products() {
-  const { getData, data, isLoading } = useProductsStore();
+  const { getData, data, isLoading,} = useProductsStore();
   const [params] = useState({
     page: 1,
     limit: 10,
@@ -62,6 +62,8 @@ export default function Products() {
 
 
           <Tables
+        
+// deletIdDataa={deletIdData}
             headers={theder}
             body={data}
             action={action}

@@ -19,6 +19,7 @@ export interface createProduct {
 export interface ProductsStore {
   data: any[];
   isLoading: boolean;
+  deletIdData:any[]
   getData: (params: GetProduct) => Promise<any>;
   createProduct: (data: createProduct) => Promise<any>;
 }

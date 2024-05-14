@@ -18,7 +18,7 @@ import Delet from "../../assets/delet";
 
 import WorkerEdit from "../modals/worker-edit/workeredit";
 
-const Tables = ({ headers, body, isLoading, editItem }: TableProps) => {
+const Tables = ({ headers, body, isLoading, editItem,deletIdData }: TableProps) => {
   const deleteItem = (id: string) => {
     try {
       Notifation({ title: "Ma'lumot muvaffaqiyatli o'chdi", type: "success" });

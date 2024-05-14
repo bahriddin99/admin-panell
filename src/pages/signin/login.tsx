@@ -21,7 +21,7 @@ const LoginIn = () => {
   };
 
   const handleSubmit = async (values: SignIn) => {
-    console.log(values);
+    // console.log(values);
 
     try {
       const response = await auth.sign_in(values);
@@ -29,12 +29,11 @@ const LoginIn = () => {
         setDataToCookie("token", response?.data.access_token);
         setDataToCookie("email", response?.data.email);
         localStorage.setItem("token", response.data.access_token);
-        navigate("/main")
-
         Notifation({
           title: "Tizimga muvaffaqiyatli kirdingiz",
           type: "success",
         });
+        setTimeout(()=>{navigate("/main")},1000)
       }
     } catch (error) {
       console.log(error);

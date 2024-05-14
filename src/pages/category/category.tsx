@@ -34,7 +34,6 @@ function Category() {
   const theder = [
     { title: "T/R", value: "index" },
     { title: "Category Name", value: "category_name" },
-    { title: "Category Id", value:"category_id" },
     { title: "Action", value: "action" },
   ];
 

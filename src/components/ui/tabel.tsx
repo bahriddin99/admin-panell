@@ -13,20 +13,19 @@ import {
 import { TableProps } from "../../interface/global";
 import { worker } from "../../service/worker/worker";
 import Notifation from "../../utils/notifation";
-import delet from "../../assets/delet.svg";
+// import delet from "../../assets/delet.svg";
+import Delet from "../../assets/delet";
+
 import WorkerEdit from "../modals/worker-edit/workeredit";
 
-const Tables = ({ headers, body, isLoading,editItem  }: TableProps) => {
-  const   deleteItem = (id: string) => {
+const Tables = ({ headers, body, isLoading, editItem }: TableProps) => {
+  const deleteItem = (id: string) => {
     try {
       Notifation({ title: "Ma'lumot muvaffaqiyatli o'chdi", type: "success" });
       worker.delete(id);
     } catch (error) {
       console.log(error);
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 300);
   };
   return (
     <Box sx={{ width: "100%" }}>
@@ -63,11 +62,9 @@ const Tables = ({ headers, body, isLoading,editItem  }: TableProps) => {
                         >
                           {header.value === "action" ? (
                             <div className="flex gap-3 cursor-pointer items-center">
-                              <img
-                                src={delet}
-                                alt="Delete"
-                                onClick={() => deleteItem(item.id)}
-                              />
+                              <div onClick={() => deleteItem(item.id)}>
+                                <Delet />
+                              </div>
 
                               <WorkerEdit />
                             </div>

@@ -21,7 +21,7 @@ export default function Products() {
     { title: "Size", value: "size" },
     { title: "Price", value: "cost" },
     { title: "Discount", value: "discount" },
-    { title: "Category", value: "category_id" },
+    // { title: "Category", value: "category_id" },
     { title: "Gender", value: "for_gender" },
     { title: "Action", value: "action" },
   ];

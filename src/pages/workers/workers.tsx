@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import Tables from "../../components/ui/tabel";
+
 import WorkerAdd from "../../components/modals/worker-add/workeradd";
 import { worker } from "../../service/worker/worker";
+import Workertabel from "../../components/ui/worker-tabel";
+import Paginations from "../../components/ui/pagination";
 
 function Workers() {
   const [data, setData] = useState([]);
@@ -62,7 +64,8 @@ function Workers() {
           </div>
           <WorkerAdd />
         </div>
-        <Tables headers={theder} body={data} isLoading={isLoading} />
+        <Workertabel headers={theder} body={data} isLoading={isLoading} />
+        <Paginations/>
       </div>
     </>
   );

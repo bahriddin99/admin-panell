@@ -11,18 +11,20 @@ import {
   TableSortLabel,
 } from "@mui/material";
 import { TableProps } from "../../interface/global";
-import { worker } from "../../service/worker/worker";
+
 import Notifation from "../../utils/notifation";
 // import delet from "../../assets/delet.svg";
 import Delet from "../../assets/delet";
 
-import WorkerEdit from "../modals/worker-edit/workeredit";
 
-const Tables = ({ headers, body, isLoading, editItem,deletIdData }: TableProps) => {
+import { category } from "../../service/category/category";
+import CategoryEdit from "../modals/category-edit/categoryedit";
+
+const Tables = ({ headers, body, isLoading }: TableProps) => {
   const deleteItem = (id: string) => {
     try {
       Notifation({ title: "Ma'lumot muvaffaqiyatli o'chdi", type: "success" });
-      worker.delete(id);
+      category.delete(id);
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +68,7 @@ const Tables = ({ headers, body, isLoading, editItem,deletIdData }: TableProps) 
                                 <Delet />
                               </div>
 
-                              <WorkerEdit />
+                              <CategoryEdit props={item} />
                             </div>
                           ) : header.value === "index" ? (
                             index + 1

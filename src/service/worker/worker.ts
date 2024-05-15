@@ -24,7 +24,7 @@ interface getParams{
 
 
 interface Worker{
-    post : (data:PostData)=> any,
+    post : (value:PostData)=> any,
     delete : (id:string)=> any,
     get : (params:getParams)=> any,
     update : (data:UpdateData)=> any,

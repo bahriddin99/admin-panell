@@ -12,6 +12,7 @@ import {
 
 import { PostData, worker } from "../../../service/worker/worker";
 import { validationSchema } from "../../../utils/validation";
+import Notifation from "../../../utils/notifation";
 
 const style = {
   position: "absolute" as "absolute",
@@ -40,15 +41,17 @@ export default function WorkerAdd() {
   };
 
   const handleSubmit = async (values: PostData) => {
-    const status = await worker.post(values);
-    if (status === 201) {
-     
-      handleClose();
-    } else {
-      handleClose();
+    try {
+        console.log(values);
+        const res = await worker.post(values);
+        console.log(res)
+        Notifation({title:"Ma'lumot muvaffaqiyatli qo'shildi",type:"success"})
+        handleClose(); 
+        setTimeout(()=>{window.location.reload()},300)
+    } catch (error) {
+        console.log(error)
     }
-  };
-
+}
   return (
     <div>
       <button

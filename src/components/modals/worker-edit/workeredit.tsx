@@ -5,11 +5,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { TextField } from "@mui/material";
-import { WorkersvalidationSchema } from "../../../utils/validation";
-import { createWorkers } from "../../../interface/global";
+import { PostData, worker } from "../../../service/worker/worker";
 import Edit from "../../../assets/edit";
-
-import { worker } from "../../../service/worker/worker";
+import { WorkersvalidationSchema } from "../../../utils/validation";
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,28 +21,27 @@ const style = {
   p: 4,
 };
 
-export default function WorkerEdit() {
+export default function EditModal({props}:any) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const initialValues: createWorkers = {
+  const initialValues: PostData = {
     email: "",
     first_name: "",
     gender: "",
     last_name: "",
     password: "",
+    id: "",
   };
-  const handleSubmit = async (values: createWorkers) => {
+  const handleSubmit = async (values: PostData) => {
+    const params = { ...values, id: props?.id };
     try {
-      console.log(values);
-      const res = await worker.post(values);
+      // console.log(values);
+      const res = await worker.post(params);
       console.log(res);
       handleClose();
-      setTimeout(() => {
-        window.location.reload();
-      }, 300);
     } catch (error) {
       console.log(error);
     }
@@ -52,10 +49,9 @@ export default function WorkerEdit() {
 
   return (
     <div>
-      <div onClick={handleOpen} >
+      <div onClick={handleOpen}>
         <Edit />
       </div>
-
       <Modal
         keepMounted
         open={open}
@@ -70,7 +66,7 @@ export default function WorkerEdit() {
             variant="h5"
             component="h5"
           >
-            Worker Create
+            Worker Edit
           </Typography>
           <Formik
             initialValues={initialValues}
@@ -142,7 +138,22 @@ export default function WorkerEdit() {
                   />
                 }
               />
-
+              <Field
+                name="password"
+                type="string"
+                as={TextField}
+                label="Password"
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                helperText={
+                  <ErrorMessage
+                    name="password"
+                    component="p"
+                    className="text-red-500 text-[15px]"
+                  />
+                }
+              />
               <Button
                 variant="contained"
                 color="primary"

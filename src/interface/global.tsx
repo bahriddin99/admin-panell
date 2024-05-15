@@ -25,7 +25,7 @@ export interface TableProps {
     headers: Header[],
     body: BodyItem[],
     isLoading?: boolean,
-    action?: any[]
-    editItem?: any,
-    deletIdData:(id:string)=> any
+    // action?: any[]
+    // editItem?: any,
+    // deletIdData:(id:string)=> any
 }

@@ -1,10 +1,8 @@
 
-
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-
+import CategoryIcon from '@mui/icons-material/Category';
 import EventNoteIcon from '@mui/icons-material/EventNote';
+
 interface  Route {
     path: string;
     content:string;
@@ -12,22 +10,24 @@ interface  Route {
 }
 
 const routers:Route[] = [
-  
-    {
-        path :"/main",
-        content: "Workers",
-        icon: <EventNoteIcon/>
-    },
     {
         path :"/main/product",
         content: "Products",
         icon: <PersonOutlineIcon/>
     },
+
     {
         path :"/main/category",
         content: "Categories",
-        icon: <DryCleaningIcon/>
+        icon: <CategoryIcon/>
+    },
+    {
+        path :"/main",
+        content: "Workers",
+        icon: <EventNoteIcon/>
     }
+  
+   
    
    
 
